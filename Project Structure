@@ -1,0 +1,27 @@
+Project Structure 
+
+
+why do we choose this model? pesuade the audiance  
+
+model selection
+	1. scatterplot - linear regression 
+	2. residual plot/ after fitting the regression (r slr) 
+	3. quantile-quantile plot
+
+missing value processing 
+
+feature engineering 
+	➢ Either by adding brand new features from outside sources
+	➢ Or adding new features derived from the original features
+	➢ Or using such new features to replace the original features
+	➢ Eliminate any unnecessary features
+
+	➢ The issue of Multicollinearity
+	➢ Categorical Feature Dummification
+
+
+
+
+stack 
+
+pipeline 
