@@ -1,0 +1,103 @@
+Kaggle Housing Price Project
+
+11/4-11/18 13 days left
+
+11/5 missing value/categorical processing/run first model 
+11/6 ordinal encoding/test data/log/scale/  
+11/7 group meeting/data cleaning merging/ kaggle community/pipeline/scaler/log/graphs/ outliers/ binning / year 
+11/8 lasso and ridge/ scatter plot of all the variables/cross validation
+11/9 feature engineering/ pipeline 
+11/10 stack/ models 
+
+
+Data Cleaning 
+	concat training and test data 
+	missing values
+	categorical feature processing 
+		convert numerical to categorical others 
+		ordinal encoding 
+		general one hot encoding
+
+	scaler before penalization normalize / standardize 
+
+
+	pipeline 
+
+Models 
+	linear regression 
+	lasso 
+	ridge 
+	elastic 
+	random forest and gradient boosting
+	bayes 
+	xg boost 
+
+feature engineering 
+	➢ Either by adding brand new features from outside sources
+	➢ Or adding new features derived from the original features
+	➢ Or using such new features to replace the original features
+	➢ Eliminate any unnecessary features
+	➢ Eliminate multicolinear features - basement area TotRmsAbvGrd 
+
+
+	heat map 
+
+Models 
+	elastic model - ifor loop for lambda and alpha
+
+
+Cross validation - ml flow / grid search
+
+
+Stack
+	stack linear ramdom forest sg boost - overfit - last step 
+
+
+
+other people's work 
+bayeeis optimizer - optimizer  lamda searching try 
+
+
+
+
+
+Presentation
+
+why do we choose this model? pesuade the audiance  
+
+model selection
+	1. scatterplot - linear regression 
+	2. residual plot/ after fitting the regression (r slr) 
+	3. quantile-quantile plot
+
+
+ 
+https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html
+
+
+https://github.com/JifuZhao/mlflow-demo
+Bayes optimizer
+hyper parameter
+https://github.com/mlflow/mlflow/tree/master/examples/sklearn_elasticnet_wine这是个跟你们项目最接近的MLflow的项目 
+
+ 
+
+?? id regression 
+
+List of Techniques
+1.Imputation
+2.Handling Outliers 
+3.Binning
+4.Log Transform
+5.One-Hot Encoding
+6.Grouping Operations
+7.Feature Split
+8.Scaling
+9.Extracting Date
+
+
+Links:
+https://github.com/xzglovenk/IowaHousingMachineLearningProject
+https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html
+https://www.kaggle.com/baghern/a-deep-dive-into-sklearn-pipelines
+https://mlflow.org/
