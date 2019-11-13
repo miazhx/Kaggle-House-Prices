@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/miazh_000/Desktop/Kaggle-House-Prices/Mia/mlruns/0/a27c83b8db3540bfb18c5aef3363eaa0/artifacts
+end_time: 1573626714309
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: a27c83b8db3540bfb18c5aef3363eaa0
+run_uuid: a27c83b8db3540bfb18c5aef3363eaa0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1573626713625
+status: 3
+tags: []
+user_id: miazh_000

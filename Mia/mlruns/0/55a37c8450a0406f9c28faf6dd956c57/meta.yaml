@@ -2,7 +2,7 @@ artifact_uri: file:///C:/Users/miazh_000/Desktop/Kaggle-House-Prices/Mia/mlruns/
 end_time: 1573433280070
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 name: ''
 run_id: 55a37c8450a0406f9c28faf6dd956c57
 run_uuid: 55a37c8450a0406f9c28faf6dd956c57

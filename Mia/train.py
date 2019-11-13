@@ -1,22 +1,20 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # MLflow Training Tutorial
+# # MLflow Training 
 # 
-# This `train.pynb` Jupyter notebook predicts the quality of wine using [sklearn.linear_model.ElasticNet](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html).  
+# This `train.pynb` Jupyter notebook predicts the housing price using [sklearn.linear_model.ElasticNet](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html).  
 # 
 # > This is the Jupyter notebook version of the `train.py` example
 # 
 # Attribution
-# * The data set used in this example is from http://archive.ics.uci.edu/ml/datasets/Wine+Quality
-# * P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis.
-# * Modeling wine preferences by data mining from physicochemical properties. In Decision Support Systems, Elsevier, 47(4):547-553, 2009.
+# * The MLflow code used in this module is from https://www.mlflow.org/docs/latest/tutorial.html
 # 
 
-# In[1]:
+# In[44]:
 
 
-# Wine Quality Sample
+# MLflow Training
 def train(in_alpha, in_l1_ratio):
     import os
     import warnings
@@ -34,6 +32,8 @@ def train(in_alpha, in_l1_ratio):
     import logging
     logging.basicConfig(level=logging.WARN)
     logger = logging.getLogger(__name__)
+    
+    from data_processing import data_process
 
     def eval_metrics(actual, pred):
         rmse = np.sqrt(mean_squared_error(actual, pred))
@@ -45,22 +45,24 @@ def train(in_alpha, in_l1_ratio):
     warnings.filterwarnings("ignore")
     np.random.seed(40)
 
-    # Read the wine-quality csv file from the URL
-    csv_url =        'http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv'
+    # Read the file
     try:
-        data = pd.read_csv(csv_url, sep=';')
+        df_raw = pd.read_csv('train.csv',index_col=0)
     except Exception as e:
         logger.exception(
             "Unable to download training & test CSV, check your internet connection. Error: %s", e)
-
+        
+    # Data processing.
+    df_processed = data_process(df_raw)
+    
     # Split the data into training and test sets. (0.75, 0.25) split.
-    train, test = train_test_split(data)
+    train, test = train_test_split(df_processed)
 
-    # The predicted column is "quality" which is a scalar from [3, 9]
-    train_x = train.drop(["quality"], axis=1)
-    test_x = test.drop(["quality"], axis=1)
-    train_y = train[["quality"]]
-    test_y = test[["quality"]]
+    # The predicted column is "SalePrice" .
+    train_x = train.drop(["SalePrice"], axis=1)
+    test_x = test.drop(["SalePrice"], axis=1)
+    train_y = train[["SalePrice"]]
+    test_y = test[["SalePrice"]]
 
     # Set default values if no alpha is provided
     if float(in_alpha) is None:
@@ -100,26 +102,36 @@ def train(in_alpha, in_l1_ratio):
         mlflow.sklearn.log_model(lr, "model")
 
 
-# In[2]:
+# In[48]:
 
 
 train(0.5, 0.5)
 
 
-# In[3]:
+# In[49]:
 
 
 train(0.2, 0.2)
 
 
-# In[4]:
+# In[51]:
 
 
-train(0.1, 0.1)
+train(0.1, 0.2)
 
 
 # In[ ]:
 
 
-
+# alphas = np.arange(0,20)
+# ridge.set_params(normalize=True)
+# coefs  = []
+# scores = []
+# for alpha in alphas:
+#         ridge.set_params(alpha=alpha)
+#         ridge.fit(house_features, prices)  
+#         coefs.append(ridge.coef_)
+#         scores.append(ridge.score(house_features, prices))
+# coefs = pd.DataFrame(coefs, index = alphas, columns = house_features.columns)  
+# coefs.head()
 
