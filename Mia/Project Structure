@@ -5,10 +5,16 @@ Kaggle Housing Price Project
 11/5 missing value/categorical processing/run first model 
 11/6 ordinal encoding/test data/log/scale/  
 11/7 group meeting/data cleaning merging/ kaggle community/pipeline/scaler/log/graphs/ outliers/ binning / year 
-11/8 lasso and ridge/ scatter plot of all the variables/cross validation
-11/9 feature engineering/ pipeline 
-11/10 stack/ models 
-
+11/8 process function 
+11/9 feature engineering/ pipeline/process function/multi&linear regression/community kernel search 
+11/10 stack/ models lasso and ridge/ scatter plot of all the variables/cross validation/ team meeting 
+11/11 Monday ml flow / train and evaluation / 
+11/12 stacking 
+11/13 train models 
+11/14
+11/15 
+11/16 slides 
+11/17 presentation preparation 
 
 Data Cleaning 
 	concat training and test data 
@@ -40,22 +46,22 @@ feature engineering
 	➢ Eliminate multicolinear features - basement area TotRmsAbvGrd 
 
 
-	heat map 
+	heatmap 
 
 Models 
-	elastic model - ifor loop for lambda and alpha
+	elastic model -  loop for lambda and alpha
 
 
-Cross validation - ml flow / grid search
+Cross validation - ml flow / grid search***
 
 
 Stack
-	stack linear ramdom forest sg boost - overfit - last step 
+	stack linear ramdom forest sg boost - overfit - last step to improve score 
 
 
 
 other people's work 
-bayeeis optimizer - optimizer  lamda searching try 
+bayeeis optimizer - optimizer  lamda searching try lectue
 
 
 
@@ -70,15 +76,18 @@ model selection
 	2. residual plot/ after fitting the regression (r slr) 
 	3. quantile-quantile plot
 
-
- 
-https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html
-
-
-https://github.com/JifuZhao/mlflow-demo
 Bayes optimizer
 hyper parameter
-https://github.com/mlflow/mlflow/tree/master/examples/sklearn_elasticnet_wine这是个跟你们项目最接近的MLflow的项目 
+ 
+
+
+
+MLFlow
+https://mlflow.org/
+https://github.com/JifuZhao/mlflow-demo
+https://www.mlflow.org/docs/latest/tutorial.html
+https://github.com/mlflow/mlflow/tree/master/examples/sklearn_elasticnet_wine
+
 
  
 
@@ -100,4 +109,19 @@ Links:
 https://github.com/xzglovenk/IowaHousingMachineLearningProject
 https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html
 https://www.kaggle.com/baghern/a-deep-dive-into-sklearn-pipelines
-https://mlflow.org/
+https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html
+https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+https://scikit-learn.org/stable/auto_examples/preprocessing/plot_all_scaling.html
+https://towardsdatascience.com/scale-standardize-or-normalize-with-scikit-learn-6ccc7d176a02
+
+OTHERS 
+BOX COX
+
+assumpltions  normalization 
+
+Questions:
+1. what if there are missing values in the test data?
+
+
+
+https://github.com/Fez3/Machine-Learning-Project/blob/master/XingC/xingc_notebook.ipynb
