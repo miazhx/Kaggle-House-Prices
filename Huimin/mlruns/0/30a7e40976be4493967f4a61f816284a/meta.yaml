@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Laptop2/Documents/Bootcamp/Kaggle-House-Prices/Huimin/mlruns/0/30a7e40976be4493967f4a61f816284a/artifacts
+end_time: 1573762921615
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 30a7e40976be4493967f4a61f816284a
+run_uuid: 30a7e40976be4493967f4a61f816284a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1573762911215
+status: 3
+tags: []
+user_id: Laptop2
