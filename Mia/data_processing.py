@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[26]:
+# In[ ]:
 
 
 import numpy as np
@@ -23,7 +23,11 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 
-def data_process(df_raw,remove_outlier = False,remove_hard_to_fit = False,linear_model = False):
+def data_process(linear_model = False):
+    
+    
+	# Read file.    
+    df_raw = pd.read_csv('train.csv',index_col=0)
 
 	# Make a copy so the original dataframe will not be altered.
     df_processed = df_raw.copy()
@@ -31,7 +35,7 @@ def data_process(df_raw,remove_outlier = False,remove_hard_to_fit = False,linear
     
 	# Remove outliers.
     outlier_list_scatter = [524, 1299]
-    outlier_list_hard_to_fit = [463, 31, 534, 1433, 739, 1159, 108, 1231, 971, 1424]
+    outlier_list_hard_to_fit = [463, 31, 534, 1433, 739, 1159, 108, 1231, 971, 1424 ]
     outlier_list = outlier_list_scatter + outlier_list_hard_to_fit
     df_processed = df_processed.drop(outlier_list)
 
@@ -39,7 +43,8 @@ def data_process(df_raw,remove_outlier = False,remove_hard_to_fit = False,linear
     ## Missing values
     
     # 259 LotFrontage  - replace missing value with 0 
-    df_processed.LotFrontage = df_processed.LotFrontage.fillna(0)
+#     df_processed.LotFrontage = df_processed.LotFrontage.fillna(0)
+    df_processed["LotFrontage"] = df_processed.groupby("Neighborhood")["LotFrontage"].transform(lambda x: x.fillna(x.median()))
 
     # 1369 Alley - replace with None
     df_processed.Alley = df_processed.Alley.fillna('None')
@@ -94,7 +99,10 @@ def data_process(df_raw,remove_outlier = False,remove_hard_to_fit = False,linear
 
     # drop GarageArea - higher correlation than GarageACars, results are better as well
     df_processed = df_processed.drop(['GarageArea'], axis=1) 
-    
+    df_processed = df_processed.drop(['MiscFeature'], axis=1) 
+#     df_processed = df_processed.drop(['1stFlrSF'], axis=1) 
+    df_processed = df_processed.drop(['TotRmsAbvGrd'], axis=1) 
+
     
 	# Feature Transformation - take the logarithm of the features.
     #Linear_Num_Cols = ['TotalBsmtSF', '1stFlrSF', '2ndFlrSF', 'GrLivArea', 'LotArea', 'GarageArea', 'TotRmsAbvGrd', 'TotalSF', 'BsmtFinSF1']
@@ -102,7 +110,7 @@ def data_process(df_raw,remove_outlier = False,remove_hard_to_fit = False,linear
     df_processed.GrLivArea = np.log(df_processed.GrLivArea)
     df_processed.TotalBsmtSF = np.log(df_processed.TotalBsmtSF+1)
 #     df_processed.LotArea = np.log(df_processed.LotArea) -- performance decreases
-#     df_processed.GarageArea = np.log(df_processed.GarageArea)
+#     df_processed.GarageArea = np.log(df_processed.GarageArea) -- will drop column 
 
 
 
@@ -151,160 +159,4 @@ def data_process(df_raw,remove_outlier = False,remove_hard_to_fit = False,linear
     df_processed = pd.get_dummies(df_processed, columns=df_processed.select_dtypes(include=['object']).columns, drop_first=True)
 
     return df_processed
-
-
-# In[21]:
-
-
-# MLflow Training
-def train_linear( ):
-    import os
-    import warnings
-    import sys
-
-    import pandas as pd
-    import numpy as np
-    from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-    from sklearn.model_selection import train_test_split
-
-    import mlflow
-    import mlflow.sklearn
-    
-    import logging
-    logging.basicConfig(level=logging.WARN)
-    logger = logging.getLogger(__name__)
-    
-    #from data_processing import data_process
-
-    def eval_metrics(actual, pred):
-        rmse = np.sqrt(mean_squared_error(actual, pred))
-        r2 = r2_score(actual, pred)
-        return rmse, r2
-
-
-    warnings.filterwarnings("ignore")
-    np.random.seed(40)
-
-    # Read the file
-    try:
-        df_raw = pd.read_csv('train.csv',index_col=0)
-    except Exception as e:
-        logger.exception(
-            "Unable to download training & test CSV, check your internet connection. Error: %s", e)
-        
-    # Data processing.
-    df_processed = data_process(df_raw)
-    
-    # The predicted column is "SalePrice" , split the data into training and test sets. (0.75, 0.25) split.
-    x_m = df_processed.drop(["SalePrice"], axis=1)
-    y_m = df_processed.loc[:,'SalePrice']
-    X_train, X_test, y_train, y_test = train_test_split(x_m, y_m, test_size=0.2, random_state=42)
-      
-    
-    # Execute linear regression
-    with mlflow.start_run():
-        ols = LinearRegression()
-        ols.fit(X_train, y_train)
-
-        # Evaluate Metrics
-        rmse = sqrt(mean_squared_error(y_test, ols.predict(X_test)))
-
-        # Print out metrics
-        print("R^2 for train set: %f" %ols.score(X_train, y_train))
-        print('-'*50)
-        print("R^2 for test  set: %f" %ols.score(X_test, y_test))
-        print('-'*50)
-        print("RMSE for test  set: %f" %rmse)
-
-        # Log parameter, metrics, and model to MLflow
-        mlflow.log_metric("r2_train", ols.score(X_train, y_train))
-        mlflow.log_metric("r2_test", ols.score(X_test, y_test))
-        mlflow.log_metric("rmse", rmse)
-
-
-
-        mlflow.sklearn.log_model(ols, "model")
-        
-
-
-# In[27]:
-
-
-train_linear( )
-
-
-# In[ ]:
-
-
-df_raw = pd.read_csv('train.csv',index_col=0)
-
-df_regression = data_process(df_raw)
-
-x_m = df_regression.drop(["SalePrice"], axis=1)
-y_m = df_regression.loc[:,'SalePrice']
-X_train, X_test, y_train, y_test = train_test_split(x_m, y_m, test_size=0.2, random_state=42)
-
-ols = LinearRegression()
-ols.fit(X_train, y_train)
-print("R^2 for train set: %f" %ols.score(X_train, y_train))
-
-print('-'*50)
-
-print("R^2 for test  set: %f" %ols.score(X_test, y_test))
-
-print('-'*50)
-rms = sqrt(mean_squared_error(y_test, ols.predict(X_test)))
-print("RMSE for test  set: %f" %rms)
-
-
-#  **Error Normality**
-
-# In[ ]:
-
-
-error = ols.predict(X_test) - y_test
-print('The mean of the errors is %.4f' %np.mean(error))
-print('The standard deviation of the errors is %.4f' % np.std(error))
-print("Skewness: %f" % error.skew())
-print("Kurtosis: %f" % error.kurt())
-sns.distplot(error, fit=norm);
-fig = plt.figure()
-res = stats.probplot(error, plot=plt)
-
-
-# High Kurtosis means there are outliers for the model which are hard to fit in the model 
-
-# In[ ]:
-
-
-# Drop the outliers 
-error.sort_values(ascending=False)
-
-
-# **Constant Variance and Independent Errors**
-
-# In[ ]:
-
-
-import numpy as np
-from scipy import stats
-import matplotlib.pyplot as plt
-
-
-sub_error = error.sample(frac=0.5)
-
-plt.figure(figsize=(9, 6))
-plt.xlim(-0.4, 0.4)
-plt.ylim(0, 4.3)
-
-my_norm = stats.norm(np.mean(error), np.std(error)).pdf
-label = 'All samples,\nmean: %.4f, std: %.4f' % (np.mean(error), np.std(error))
-plt.plot(np.linspace(-0.4, 0.4), my_norm(np.linspace(-0.4, 0.4)), label=label)
-
-my_norm = stats.norm(np.mean(sub_error), np.std(sub_error)).pdf
-label = 'Half samples,\nmean: %.4f, std: %.4f' % (np.mean(sub_error), np.std(sub_error))
-plt.plot(np.linspace(-0.4, 0.4), my_norm(np.linspace(-0.4, 0.4)), color='green', label=label)
-
-plt.legend()
-plt.show()
 
