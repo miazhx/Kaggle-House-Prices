@@ -1,20 +1,9 @@
 import numpy as np
 import pandas as pd
 
-
-from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression 
 from math import sqrt
 from scipy import stats
 from scipy.stats import norm
-
-
-import matplotlib.pyplot as plt
-import matplotlib as matplotlib
-import seaborn as sns
-%matplotlib inline
-
 
 
 def data_process(test=False):
@@ -36,6 +25,10 @@ def data_process(test=False):
     
     # Store the sale price information
     sale_price_train = df_raw_train['SalePrice']
+    
+    # Drop the sales price column to only keep the features
+    df_raw_train = df_raw_train.drop(['SalePrice'], axis = 1)
+#     print(df_raw_train.shape)
     
     # Merge train and test df together for later process
     df_processed = pd.concat([df_raw_train, df_raw_test], sort=True)
