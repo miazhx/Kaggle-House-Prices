@@ -17,6 +17,17 @@ MSSubClass: Identifies the type of dwelling involved in the sale.
        180	PUD - MULTILEVEL - INCL SPLIT LEV/FOYER
        190	2 FAMILY CONVERSION - ALL STYLES AND AGES
 
+HouseStyle: Style of dwelling
+       
+       1Story One story
+       1.5Fin One and one-half story: 2nd level finished
+       1.5Unf One and one-half story: 2nd level unfinished
+       2Story Two story
+       2.5Fin Two and one-half story: 2nd level finished
+       2.5Unf Two and one-half story: 2nd level unfinished
+       SFoyer Split Foyer
+       SLvl   Split Level
+
 MSZoning: Identifies the general zoning classification of the sale.
 		
        A	Agriculture
@@ -309,6 +320,8 @@ BsmtFinType1: Rating of basement finished area
        LwQ	Low Quality
        Unf	Unfinshed
        NA	No Basement
+
+       
 		
 BsmtFinSF1: Type 1 finished square feet
 
@@ -370,9 +383,13 @@ BsmtFullBath: Basement full bathrooms
 
 BsmtHalfBath: Basement half bathrooms
 
+#add 
+
 FullBath: Full bathrooms above grade
 
 HalfBath: Half baths above grade
+
+#add 
 
 Bedroom: Bedrooms above grade (does NOT include basement bedrooms)
 
@@ -387,6 +404,8 @@ KitchenQual: Kitchen quality
        Po	Poor
        	
 TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)
+
+# delete
 
 Functional: Home functionality (Assume typical unless deductions are warranted)
 
@@ -432,6 +451,8 @@ GarageFinish: Interior finish of the garage
 GarageCars: Size of garage in car capacity
 
 GarageArea: Size of garage in square feet
+
+# choose one 
 
 GarageQual: Garage quality
 
@@ -521,3 +542,5 @@ SaleCondition: Condition of sale
        Alloca	Allocation - two linked properties with separate deeds, typically condo with a garage unit	
        Family	Sale between family members
        Partial	Home was not completed when last assessed (associated with New Homes)
+
+       

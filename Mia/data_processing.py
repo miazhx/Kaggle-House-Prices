@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[2]:
 
 
 import numpy as np
@@ -23,21 +23,26 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 
-def data_process(linear_model = False):
+def data_process(test = False):
     
     
-	# Read file.    
-    df_raw = pd.read_csv('train.csv',index_col=0)
+	# Read file for train or test.
+    if test:
+        df_raw = pd.read_csv('test.csv',index_col=0)
+    else:
+        df_raw = pd.read_csv('train.csv',index_col=0)
+        
 
 	# Make a copy so the original dataframe will not be altered.
     df_processed = df_raw.copy()
     
     
 	# Remove outliers.
-    outlier_list_scatter = [524, 1299]
-    outlier_list_hard_to_fit = [463, 31, 534, 1433, 739, 1159, 108, 1231, 971, 1424 ]
-    outlier_list = outlier_list_scatter + outlier_list_hard_to_fit
-    df_processed = df_processed.drop(outlier_list)
+    if test is False:
+        outlier_list_scatter = [524, 1299]
+        outlier_list_hard_to_fit = [463, 31, 534, 1433, 739, 1159, 108, 1231, 971, 1424 ]
+        outlier_list = outlier_list_scatter + outlier_list_hard_to_fit
+        df_processed = df_processed.drop(outlier_list)
 
 
     ## Missing values
@@ -106,7 +111,8 @@ def data_process(linear_model = False):
     
 	# Feature Transformation - take the logarithm of the features.
     #Linear_Num_Cols = ['TotalBsmtSF', '1stFlrSF', '2ndFlrSF', 'GrLivArea', 'LotArea', 'GarageArea', 'TotRmsAbvGrd', 'TotalSF', 'BsmtFinSF1']
-    df_processed.SalePrice = np.log(df_processed.SalePrice)
+    if test is False:
+        df_processed.SalePrice = np.log(df_processed.SalePrice)
     df_processed.GrLivArea = np.log(df_processed.GrLivArea)
     df_processed.TotalBsmtSF = np.log(df_processed.TotalBsmtSF+1)
 #     df_processed.LotArea = np.log(df_processed.LotArea) -- performance decreases
