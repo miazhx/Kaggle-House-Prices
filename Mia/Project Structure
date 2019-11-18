@@ -1,0 +1,147 @@
+Kaggle Housing Price Project
+
+11/4-11/18 13 days left
+
+11/5 missing value/categorical processing/run first model 
+11/6 ordinal encoding/test data/log/scale/  
+11/7 group meeting/data cleaning merging/ kaggle community/pipeline/scaler/log/graphs/ outliers/ binning / year 
+11/8 process function 
+11/9 feature engineering/ pipeline/process function/multi&linear regression/community kernel search 
+11/10 stack/ models lasso and ridge/ scatter plot of all the variables/cross validation/ team meeting 
+11/11 Monday ml flow / train and evaluation / 
+11/12 stacking 
+
+11/13 random forest/feature engineering/data cleaning/mlflow for all models 
+11/14 tree boosting/ pipeline/ tree lenghth/ feature engineering/ rf compare packages 
+11/15 stacking/ submitting results 
+11/16 slides/   
+11/17 presentation preparation/ 
+
+11/18 presentation 
+
+Data Cleaning 
+	concat training and test data 
+	missing values test data 
+	categorical feature processing 
+		convert numerical to categorical others 
+		ordinal encoding 
+		general one hot encoding
+
+	scaler before penalization normalize / standardize 
+
+
+	pipeline 
+
+Models 
+	linear regression 
+	lasso 
+	ridge 
+	elastic 
+	random forest and gradient boosting
+	bayes 
+	xg boost 
+
+feature engineering 
+	➢ Either by adding brand new features from outside sources
+	➢ Or adding new features derived from the original features
+	➢ Or using such new features to replace the original features
+	➢ Eliminate any unnecessary features
+	➢ Eliminate multicolinear features - basement area TotRmsAbvGrd 
+
+
+	heatmap 
+
+Models 
+	elastic model -  loop for lambda and alpha
+
+
+Cross validation - ml flow / grid search***
+
+
+Stack
+	stack linear ramdom forest sg boost - overfit - last step to improve score 
+
+
+
+other people's work 
+bayeeis optimizer - optimizer  lamda searching try lectue
+
+
+
+
+
+Presentation
+
+why do we choose this model? pesuade the audiance  
+
+model selection
+	1. scatterplot - linear regression 
+	2. residual plot/ after fitting the regression (r slr) 
+	3. quantile-quantile plot
+
+Bayes optimizer
+hyper parameter
+ 
+
+
+
+MLFlow
+https://mlflow.org/
+https://github.com/JifuZhao/mlflow-demo
+https://www.mlflow.org/docs/latest/tutorial.html
+https://github.com/mlflow/mlflow/tree/master/examples/sklearn_elasticnet_wine
+
+
+ 
+
+?? id regression 
+
+List of Techniques
+1.Imputation
+2.Handling Outliers 
+3.Binning
+4.Log Transform
+5.One-Hot Encoding
+6.Grouping Operations
+7.Feature Split
+8.Scaling
+9.Extracting Date
+
+
+Links:
+https://github.com/xzglovenk/IowaHousingMachineLearningProject
+https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html
+https://www.kaggle.com/baghern/a-deep-dive-into-sklearn-pipelines
+https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html
+https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+https://scikit-learn.org/stable/auto_examples/preprocessing/plot_all_scaling.html
+https://towardsdatascience.com/scale-standardize-or-normalize-with-scikit-learn-6ccc7d176a02
+
+OTHERS 
+BOX COX
+bayes optimizer 
+
+
+assumpltions  normalization 
+
+Questions:
+1. what if there are missing values in the test data?
+2. grid search and cv 
+
+
+
+https://github.com/Fez3/Machine-Learning-Project/blob/master/XingC/xingc_notebook.ipynb
+
+
+The best one is gradient_boosting_classifier for the first_stage and linear-regression for the second stage.
+
+https://github.com/suvoooo/Machine_Learning/blob/master/pipelineWine.py  -- comprehensive pipeline tutoriol 
+https://www.kaggle.com/baghern/a-deep-dive-into-sklearn-pipelines   --- pipeline cross validation 
+
+
+how to residuals regress by random forest 
+
+stacking
+https://www.kaggle.com/serigne/stacked-regressions-top-4-on-leaderboard
+https://www.kaggle.com/agodwinp/stacking-house-prices-walkthrough-to-top-5
+https://www.kaggle.com/arthurtok/introduction-to-ensembling-stacking-in-python

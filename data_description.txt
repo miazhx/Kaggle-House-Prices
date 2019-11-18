@@ -199,7 +199,7 @@ RoofStyle: Type of roof
        Mansard	Mansard
        Shed	Shed
 		
-RoofMatl: Roof material
+c: Roof material
 
        ClyTile	Clay or Tile
        CompShg	Standard (Composite) Shingle
