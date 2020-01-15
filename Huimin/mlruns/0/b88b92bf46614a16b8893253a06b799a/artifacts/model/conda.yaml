@@ -1,8 +1,0 @@
-channels:
-- defaults
-dependencies:
-- python=3.7.3
-- pip:
-  - mlflow
-  - h2o==3.26.0.10
-name: mlflow-env
